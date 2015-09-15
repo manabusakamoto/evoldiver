@@ -3,12 +3,10 @@
 \alias{evoldiver}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+evolution and biodiversity
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+tools for evolutionary biology, biodiversity and comparative studies
 }
 \details{
 \tabular{ll}{
@@ -21,9 +19,9 @@ License: \tab What license is it under?\cr
 ~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-Who wrote it
+Manabu Sakamoto
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: manabu.sakamoto@gmail.com
 ~~ The author and/or maintainer of the package ~~
 }
 \references{
