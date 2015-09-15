@@ -1,0 +1,1 @@
+AIC.pewma <- function(x){return(x$aic)}

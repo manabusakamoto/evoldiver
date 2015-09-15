@@ -1,0 +1,1 @@
+countDuplicate <- function(x){return(countUnique(x[duplicated(x)]))}

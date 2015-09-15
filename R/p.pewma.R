@@ -1,0 +1,1 @@
+p.pewma <- function(x){return(2*pnorm(-abs(x$z[-1])))}
