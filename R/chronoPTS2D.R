@@ -1,6 +1,6 @@
 #####	chronoPTS2D	#####
 
-chronoPTS2D <- function(x, y, tree, tip.age=NULL, min.age=NULL, radius=NULL, xlab=NULL, ylab=NULL, zlab=NULL, col=NULL, clade=NULL, A=NULL, method=c("REML","ML","PIC","GLS"), node.label=T, node.adj=NULL, node.cex=NULL, tip.label="num", tip.adj=NULL, tip.cex=NULL, box=TRUE, shadow=NULL){
+chronoPTS2D <- function(x, y, tree, tip.age=NULL, min.age=NULL, radius=NULL, xlab=NULL, ylab=NULL, zlab=NULL, col=NULL, clade=NULL, A=NULL, method=c("REML","ML","PIC","GLS"), node.label=T, node.adj=NULL, node.cex=NULL, tip.label="num", tip.adj=NULL, tip.cex=NULL, box=TRUE, shadow=FALSE){
   require(ape)
 	require(rgl)
 	if(is.null(col)){col=rep("black",length(tree$tip))}
@@ -76,7 +76,7 @@ chronoPTS2D <- function(x, y, tree, tip.age=NULL, min.age=NULL, radius=NULL, xla
 		if(is.null(tip.cex)){tip.cex=0.6}
 			text3d(x, y, -age, col=col, text=tree$tip, adj=tip.adj, cex=tip.cex)
 		}
-	if(is.null(shadow)==FALSE){
+	if(shadow){
 		par3d(ignoreExtent=TRUE)
 		bbox <- par3d("bbox")
 		points3d(x, y, bbox[5], col=col, point_antialias=T, alpha=shadow)
