@@ -16,13 +16,18 @@ Version: \tab 1.0\cr
 Date: \tab 2014-08-27\cr
 License: \tab What license is it under?\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
+A collection of useful functions for phylogenetic and biodiversity studies.
+Representative functions are:
+chronoPTS1D
+chronoPTS2D
+df2phylo
+phylo2df
+#~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
 Manabu Sakamoto
 
 Maintainer: manabu.sakamoto@gmail.com
-~~ The author and/or maintainer of the package ~~
 }
 \references{
 ~~ Literature or other references for background information ~~
