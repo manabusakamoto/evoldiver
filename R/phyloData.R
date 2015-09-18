@@ -36,7 +36,9 @@ phylo2df <- function(x){
   if(length(grep("^$",x))>0){
     x <- x[-grep("^$",x)]
   }
-  x <- strsplit(x," {1,}| {2,}|\t")
+  x <- sub(" |\t", ";", x)
+  x <- strsplit(x, ";")
+  # x <- strsplit(x," {1,}| {2,}|\t")
   tx <- character(length(x))
   chm <- NULL
   for(i in 1:length(x)){
