@@ -31,7 +31,7 @@ phylo2df <- function(x){
   }
   if(length(grep("nexus", x, ignore.case=T))>0){
     x <- x[-c(1:grep("^matrix$", x, ignore.case=T))]
-    x <- x[-grep(";",x)]
+    x <- x[-c(grep(";",x)[1]:length(x))]
   }
   if(length(grep("^$",x))>0){
     x <- x[-grep("^$",x)]
@@ -47,12 +47,15 @@ phylo2df <- function(x){
     ch <- xi[2]
     ch <- gsub(" ", "", ch)
     if(length(grep("[[:digit:]]",ch))>0){
-      if(length(grep("\\(", ch))>0) {ch <- strsplit(ch, "(?<!\\(|^)(?!\\)|\\d+\\)|$)", perl=T)}
-      if(length(grep("\\[", ch))>0) {ch <- strsplit(ch, "(?<!\\[|^)(?!\\]|\\d+\\]|$)", perl=T)}
-      if(length(grep("\\{", ch))>0) {ch <- strsplit(ch, "(?<!\\{|^)(?!\\}|\\d+\\}|$)", perl=T)}
-      if(length(grep("\\(|\\[|\\{", ch))==0) {ch <- strsplit(ch, "")}
+      if(length(grep("\\(", ch))>0 | length(grep("\\[", ch))>0 | length(grep("\\{", ch))>0) {
+        ch <- unlist(strsplit(ch, "(?<!\\(|\\{|\\[|^)(?!\\)|\\}|\\]|\\d+\\}|\\d+\\)|\\d+\\]|$)", perl=T))
+      }
+      #       if(length(grep("\\(", ch))>0) {ch <- unlist(strsplit(ch, "(?<!\\(|^)(?!\\)|\\d+\\)|$)", perl=T))}
+      #       if(length(grep("\\[", ch))>0) {ch <- unlist(strsplit(ch, "(?<!\\[|^)(?!\\]|\\d+\\]|$)", perl=T))}
+      #       if(length(grep("\\{", ch))>0) {ch <- unlist(strsplit(ch, "(?<!\\{|^)(?!\\}|\\d+\\}|$)", perl=T))}
+      if(length(grep("\\(|\\[|\\{", ch))==0) {ch <- unlist(strsplit(ch, ""))}
     }else{
-      ch <- strsplit(ch, "")
+      ch <- unlist(strsplit(ch, ""))
     }
     # cat(i, length(unlist(ch)), "\n")
     chm <- rbind(chm, unlist(ch))
@@ -60,6 +63,41 @@ phylo2df <- function(x){
   df <- data.frame(Taxon=tx, chm, stringsAsFactors=F)
   return(df)
 }
+# phylo2df <- function(x){
+#   if(length(grep("xread", x, ignore.case=T))>0){
+#     x <- del.tnt.fmt(x)
+#   }
+#   if(length(grep("nexus", x, ignore.case=T))>0){
+#     x <- x[-c(1:grep("^matrix$", x, ignore.case=T))]
+#     x <- x[-grep(";",x)]
+#   }
+#   if(length(grep("^$",x))>0){
+#     x <- x[-grep("^$",x)]
+#   }
+#   x <- sub(" |\t", ";", x)
+#   x <- strsplit(x, ";")
+#   # x <- strsplit(x," {1,}| {2,}|\t")
+#   tx <- character(length(x))
+#   chm <- NULL
+#   for(i in 1:length(x)){
+#     xi <- x[[i]]
+#     tx[i] <- xi[1]
+#     ch <- xi[2]
+#     ch <- gsub(" ", "", ch)
+#     if(length(grep("[[:digit:]]",ch))>0){
+#       if(length(grep("\\(", ch))>0) {ch <- strsplit(ch, "(?<!\\(|^)(?!\\)|\\d+\\)|$)", perl=T)}
+#       if(length(grep("\\[", ch))>0) {ch <- strsplit(ch, "(?<!\\[|^)(?!\\]|\\d+\\]|$)", perl=T)}
+#       if(length(grep("\\{", ch))>0) {ch <- strsplit(ch, "(?<!\\{|^)(?!\\}|\\d+\\}|$)", perl=T)}
+#       if(length(grep("\\(|\\[|\\{", ch))==0) {ch <- strsplit(ch, "")}
+#     }else{
+#       ch <- strsplit(ch, "")
+#     }
+#     # cat(i, length(unlist(ch)), "\n")
+#     chm <- rbind(chm, unlist(ch))
+#   }
+#   df <- data.frame(Taxon=tx, chm, stringsAsFactors=F)
+#   return(df)
+# }
 ################################################################################################################################
 
 
