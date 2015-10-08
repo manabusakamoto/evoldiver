@@ -11,7 +11,7 @@ read.BayesTraits <- function(path, data.table=NULL){
   dt <- sapply(x, strsplit, split="\t")
   names(dt) <- NULL
   cnm <- dt[[1]]
-  dt <- lapply(dt[-1], as.numeric)
+  dt <- lapply(dt[-1], as.numeric, na.omit)
   if(!is.null(data.table)){
     dt <- data.table(do.call("rbind", dt))
     setnames(dt, cnm)
