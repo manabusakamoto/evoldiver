@@ -8,8 +8,8 @@ pair.pMCMC <- function(x){
     p <- numeric(ncol(x2))
     for(k in 1:ncol(x2)){
       d <- x1 - x2[,k]
-      if(mean(d>0)){.cond <- d<=0}
-      if(mean(d<0)){.cond <- d>=0}
+      if(mean(d)>0){.cond <- d<=0}
+      if(mean(d)<0){.cond <- d>=0}
       p[k] <- sum(.cond)/length(d)
     }
     if(j==1){
