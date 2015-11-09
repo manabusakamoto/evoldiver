@@ -1,6 +1,7 @@
 ########################################################################
 # function to calculate pairwise p-values between groups
 pair.pMCMC <- function(x){
+  x <- as.data.frame(x)
   pMCMC <- matrix(ncol=ncol(x), nrow=ncol(x))
   for(j in 1:ncol(x)){
     x1 <- x[,j]
