@@ -8,9 +8,9 @@ pair.pMCMC <- function(x){
     p <- numeric(ncol(x2))
     for(k in 1:ncol(x2)){
       d <- x1 - x2[,k]
-      cond1 <- d > 0
-      cond2 <- d < 0
-      p[k] <- min(c({sum(cond1)/length(d)},{sum(cond2)/length(d)}))*2
+      if(mean(d>0)){.cond <- d<=0}
+      if(mean(d<0)){.cond <- d>=0}
+      p[k] <- sum(.cond)/length(d)
     }
     if(j==1){
       p <- c(NA, p)
