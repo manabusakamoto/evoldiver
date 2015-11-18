@@ -3,6 +3,7 @@ read.BayesTraits <- function(path, data.table=NULL){
   x <- readLines(path)
   rm(path)
   id <- grep("Iteration\tLh", x)
+  id <- max(id)
   x <- x[-c(1:{id-1})]
   id <- grep("Sec:", x)
   if(length(id)>0){x <- x[1:{id-1}]}
