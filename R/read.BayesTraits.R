@@ -5,7 +5,7 @@ read.BayesTraits <- function(path, data.table=NULL){
   id <- grep("Iteration\tLh", x)
   x <- x[-c(1:{id-1})]
   id <- grep("Sec:", x)
-  x <- x[1:{id-1}]
+  if(length(id)>0){x <- x[1:{id-1}]}
   dd <- x[1]
   strsplit(dd, "\t")
   dt <- sapply(x, strsplit, split="\t")
