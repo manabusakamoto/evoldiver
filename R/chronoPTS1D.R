@@ -1,5 +1,5 @@
 #####	Function chronoPTS1D	#####
-chronoPTS1D<-function(x, tree, tip.age=NULL, min.age=NULL, xlab=NULL, ylab=NULL, col=NULL, clade=NULL,  A=NULL, method="REML", node.label=T, node.adj=NULL, node.cex=NULL, tip.label="num", tip.adj=NULL, tip.cex=NULL, CI=FALSE, ...){
+chronoPTS1D<-function(x, tree, tip.age=NULL, min.age=NULL, xlab=NULL, ylab=NULL, col=NULL, clade=NULL,  A=NULL, method="REML", node.label=T, node.adj=NULL, node.cex=NULL, tip.label="num", tip.adj=NULL, tip.cex=NULL, CI=FALSE, pct.mar=0.05, ...){
   require(ape)
   #require(gplots)
   if(is.null(col)){col=rep("black",length(tree$tip))}
@@ -49,15 +49,31 @@ chronoPTS1D<-function(x, tree, tip.age=NULL, min.age=NULL, xlab=NULL, ylab=NULL,
     upp <- ci.x[,2]
     lwr <- ci.x[,1]
     #plotCI(nodeage, ace.x, uiw=upp, liw=lwr,cex=0.5, col="grey90", xlim=rev(c( min(age)-padding, max(nodeage) )), ylim=c(min(rx),max(rx)), xlab=xlab, ylab=ylab, gap=0, xaxt="n", yaxt="n")
-    plot(nodeage, ace.x, cex=0.5, col="grey90", xlim=rev(range(c( min(age)-padding, pretty(max(nodeage)) ))), ylim=range(pretty(c(x,ace.x))), xlab=xlab, ylab=ylab, axes=F, xaxs="i", yaxs="i", ...)
+    plot(
+      nodeage, ace.x, cex=0.5, col="grey90", 
+      xlim=rev(range(c( {min(age)-padding}, {max(nodeage) + diff(range(age, nodeage))*pct.mar} ))), 
+      # ylim=range(pretty(c(min(c(x, ace.x)) - diff(range(c(x, ace.x)))*0.1, max(c(x, ace.x))))),
+      ylim=range(c({min(c(x, lwr)) - diff(range(c(x, upp, lwr)))*pct.mar}, {max(c(x, upp)) + diff(range(c(x, lwr, upp)))*pct.mar})),
+      xlab=xlab, ylab=ylab, axes=F, xaxs="i", yaxs="i", ...
+    )
     arrows(nodeage, ace.x, nodeage, lwr, length=0.05, angle=90, code=3, lwd=0.5, col="grey")
     arrows(nodeage, ace.x, nodeage, upp, length=0.05, angle=90, code=3, lwd=0.5, col="grey")
-    axis(1, pretty(c(min(age),max(nodeage))))
-    axis(2, las=2)
+    axis(1, at=c(min(age),{max(nodeage) + diff(range(age, nodeage))*0.1}), labels=c("",""), lwd.ticks=0)
+    axis(1, lwd=0, lwd.ticks=1)
+    axis(2, at=range(c({min(c(x, lwr)) - diff(range(c(x, upp, lwr)))*pct.mar}, {max(c(x, upp)) + diff(range(c(x, lwr, upp)))*pct.mar})), labels=c("",""), lwd.ticks=0)
+    axis(2, lwd=0, lwd.ticks=1, las=2)
   }else{
-    plot(nodeage, ace.x, cex=0.5, col="grey90", xlim=rev(range(c( min(age)-padding, pretty(max(nodeage)) ))), ylim=range(pretty(c(x,ace.x))), xlab=xlab, ylab=ylab, axes=F, xaxs="i", yaxs="i", ...)
-    axis(1, pretty(c(min(age),max(nodeage))))
-    axis(2, las=2)
+    plot(
+      nodeage, ace.x, cex=0.5, col="grey90", 
+      xlim=rev(range(c( {min(age)-padding}, {max(nodeage) + diff(range(age, nodeage))*pct.mar} ))),
+      # ylim=range(pretty(c(min(c(x, ace.x)) - diff(range(c(x, ace.x)))*0.1, max(c(x, ace.x))))),
+      ylim=range(c({min(c(x, ace.x)) - diff(range(c(x, ace.x)))*pct.mar}, {max(c(x, ace.x)) + diff(range(c(x, ace.x)))*pct.mar})),
+      xlab=xlab, ylab=ylab, axes=F, xaxs="i", yaxs="i", ...
+    )
+    axis(1, at=c(min(age),{max(nodeage) + diff(range(age, nodeage))*pct.mar}), labels=c("",""), lwd.ticks=0)
+    axis(1, lwd=0, lwd.ticks=1)
+    axis(2, at=range(c({min(c(x, ace.x)) - diff(range(c(x, ace.x)))*pct.mar}, {max(c(x, ace.x)) + diff(range(c(x, ace.x)))*pct.mar})), labels=c("",""), lwd.ticks=0)
+    axis(2, lwd=0, lwd.ticks=1, las=2)
   }
   nodes.x <- data.frame(c(age,nodeage))
   nodes.y <- data.frame(c(x,ace.x))
