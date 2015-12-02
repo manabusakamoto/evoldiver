@@ -35,9 +35,12 @@ chronoPTS1D<-function(x, tree, tip.age=NULL, min.age=NULL, xlab=NULL, ylab=NULL,
     }
   }
   if(length(col)==1){col=rep(col,length(tree$tip))}else{col=col}
-  if(is.null(clade)){nodeCol <- rep("gray", tree$Nnode)
-  node.col <- cbind(seq(1:tree$Nnode),nodeCol)}else{
-    node.col <- cladeCol(tree,clade,col)}
+  if(is.null(clade)){
+    nodeCol <- rep("gray", tree$Nnode)
+    node.col <- cbind(seq(1:tree$Nnode),nodeCol)
+  }else{
+    node.col <- cladeCol(tree,clade,col)
+  }
   allnodecol <- c(col,as.character(node.col[,2]))
   age <- as.numeric(tip.age)
   x <- as.numeric(x)

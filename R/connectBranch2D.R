@@ -1,6 +1,6 @@
 #####	function to connect branches in 2D
 connectBranch2D <- function(tree, nodes.x, nodes.y, col){
-	for(i in 1:length(tree$edge[,1])){
+	for(i in 1:nrow(tree$edge)){
 		node1 <- tree$edge[i,1]
 		node2 <- tree$edge[i,2]
 		node1.x <- nodes.x[rownames(nodes.x)==node1,]
