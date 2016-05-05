@@ -1,5 +1,5 @@
 #####	Compute and plot prediction intervals on regression:
-linesPI <-function(x, level=0.95, col=NULL, lty=NULL){
+linesPI <-function(x, level=0.95, col=NULL, lty=NULL, ...){
   if(is.null(col)){col="black"}
   if(is.null(lty)){lty=3}
   p <- 1 - {{1-level}/2}
@@ -13,8 +13,8 @@ linesPI <-function(x, level=0.95, col=NULL, lty=NULL){
   ci <- s.t*se
   uyv <- yv+ci
   lyv <- yv-ci
-  lines(xv,uyv,lty=lty, col=col)
-  lines(xv,lyv,lty=lty, col=col)
+  lines(xv,uyv,lty=lty, col=col, ...)
+  lines(xv,lyv,lty=lty, col=col, ...)
 }
 # linesPI <- function(x, col=NULL, lty=NULL, level=NULL){
 #   if(is.null(level)){level=0.95}
