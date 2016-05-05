@@ -24,6 +24,8 @@ pair.pMCMC <- function(x){
     }
     pMCMC[,j] <- p
   }
+  colnames(pMCMC) <- names(x)
+  rownames(pMCMC) <- names(x)
   return(pMCMC)
 }
 ########################################################################
