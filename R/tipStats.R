@@ -1,16 +1,16 @@
 
-tipStats <- function(x, time, intervalLWR, intervalUPR){
-  stats <- matrix(nrow=length(intervalLWR), ncol=2)
+tipStats <- function(x, time, FAD, LAD){
+  stats <- matrix(nrow=length(FAD), ncol=2)
   cond0 <- class(time)=="matrix"|class(time)=="data.frame"
   if(!cond0){
     time <- cbind(time, c(time[-1],0))
   }
   time1 <- time[,1]
   time2 <- time[,2]
-  for(i in 1:length(intervalLWR)){
-    age.1 <- round(intervalLWR[i],2)
+  for(i in 1:length(FAD)){
+    age.1 <- round(FAD[i],2)
     if(age.1 > max(time1)) age.1 <- max(time1)
-    age.2 <- round(intervalUPR[i],2)
+    age.2 <- round(LAD[i],2)
     .fad <- .lad <- vector(length=nrow(time))
     for(j in 1:nrow(time)){
       .t <- time[j,]
