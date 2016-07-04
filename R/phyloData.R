@@ -30,7 +30,9 @@ phylo2df <- function(x){
     x <- del.tnt.fmt(x)
   }
   if(length(grep("nexus", x, ignore.case=T))>0){
-    x <- x[-c(1:grep("^matrix$", x, ignore.case=T))]
+    if(grepl("^matrix$", x, ignore.case=T)) .id <- grep("^matrix$", x, ignore.case=T)
+    if(grep("^[[:space:]]matrix$", x, ignore.case=T)) .id <- grep("^[[:space:]]matrix$", x, ignore.case=T)
+    x <- x[-c(1:.id)]
     x <- x[-c(grep(";",x)[1]:length(x))]
   }
   if(length(grep("^$",x))>0){
