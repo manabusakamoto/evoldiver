@@ -6,7 +6,10 @@ read.BayesTraits <- function(path, data.table=NULL){
   id <- max(id)
   x <- x[-c(1:{id-1})]
   id <- grep("Sec:", x)
-  if(length(id)>0){x <- x[1:{id-1}]}
+  if(length(id)>0){
+    id <- id[1]
+    x <- x[1:{id-1}]
+  }
   dd <- x[1]
   dt <- sapply(x, strsplit, split="\t")
   names(dt) <- NULL
