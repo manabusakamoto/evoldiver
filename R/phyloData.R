@@ -38,6 +38,8 @@ phylo2df <- function(x){
   if(length(grep("^$",x))>0){
     x <- x[-grep("^$",x)]
   }
+  pat <- "([[:digit:]])([[:space:]])([[:digit:]]){1,}"
+  while(sum(grepl(pat, x)) > 0) x <- gsub(pat, "\\1\\3", x)
   x <- gsub("[[:space:]]{1,}", ";", x)
   x <- gsub("^;", "", x)
   x <- strsplit(x, ";")
