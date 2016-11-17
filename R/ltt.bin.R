@@ -1,8 +1,8 @@
 # function to create lineage through time bins
-ltt.bin <- function(phy, t){
+ltt.bin <- function(phy, t, ...){
   require(ape)
   require(data.table)
-  ages <- nodeAges(phy, min.age = 0)
+  ages <- nodeAges(phy, ...)
   
   anc <- phy$edge[, 1]
   dec <- phy$edge[, 2]
