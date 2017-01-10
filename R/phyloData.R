@@ -53,7 +53,8 @@ phylo2df <- function(x){
     ch <- gsub(" ", "", ch)
     if(length(grep("[[:digit:]]",ch))>0){
       if(length(grep("\\(", ch))>0 | length(grep("\\[", ch))>0 | length(grep("\\{", ch))>0) {
-        ch <- unlist(strsplit(ch, "(?<!\\(|\\{|\\[|^)(?!\\)|\\}|\\]|\\d+\\}|\\d+\\)|\\d+\\]|$)", perl=T))
+        # ch <- unlist(strsplit(ch, "(?<!\\(|\\{|\\[|^)(?!\\)|\\}|\\]|\\d+\\}|\\d+\\)|\\d+\\]|$)", perl=T))
+        ch <- unlist(strsplit(ch, "\\([^)]*\\)(*SKIP)(*F)|(?=)", perl=T))
       }
       #       if(length(grep("\\(", ch))>0) {ch <- unlist(strsplit(ch, "(?<!\\(|^)(?!\\)|\\d+\\)|$)", perl=T))}
       #       if(length(grep("\\[", ch))>0) {ch <- unlist(strsplit(ch, "(?<!\\[|^)(?!\\]|\\d+\\]|$)", perl=T))}
