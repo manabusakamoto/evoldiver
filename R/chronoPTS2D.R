@@ -43,9 +43,11 @@ chronoPTS2D <- function(x, y, tree, tip.age=NULL, min.age=NULL, radius=NULL, xla
 	age <- tip.age
 	allnodecol <- c(col,as.character(node.col[,2]))
 	X <- c(x,ace.x)
-	names(X)[1:length(x)] <- c(1:length(x))
+	names(X) <- c(1:length(X))
+	# names(X)[1:length(x)] <- c(1:length(x))
 	Y <- c(y,ace.y)
-	names(Y)[1:length(y)] <- c(1:length(y))
+	names(Y) <- c(1:length(Y))
+	# names(Y)[1:length(y)] <- c(1:length(y))
 	ages <- c(age,nodeage)
 	names(ages)[1:length(age)] <- c(1:length(age))
 	col3d <- c(col,node.col[,2])
