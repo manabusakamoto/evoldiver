@@ -1,4 +1,4 @@
-plotAxesBuffers <- function(x, y, rev.x=NULL, ...){
+plotAxesBuffers <- function(x, y, rev.x=FALSE, ...){
   ax.buff <- axesBuffers(x = x, y = y)
   .xlim <- ax.buff$xlim
   .ylim <- ax.buff$ylim
