@@ -2,7 +2,7 @@ coeff.BT <- function(x, data=NULL, header=NULL){
   # x is BayesTraits log file object
   # data is input data object with headers
   # header is vector of variable names
-  if(exists("data") & exists("header")) {
+  if(!is.null(data) & !is.null(header)) {
     warning("Arguments data and header are specified: Taking header argument")
     v.dt <- header
   }else{
