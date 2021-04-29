@@ -21,9 +21,9 @@ makeNewData <- function(data, postMCMC, EffectsMain){
     # i <- 1
     .eff.nm <- eff.nms[i]
     .v <- unlist(data[, .eff.nm, with=F])
-    .v.min <- floor(min(.v))
-    .v.max <- ceiling(max(.v))
-    .v.seq <- seq(.v.min, .v.max, 1)
+    .v.min <- min(.v)
+    .v.max <- max(.v)
+    .v.seq <- seq(.v.min, .v.max, length.out = 100)
     dt.new <- data.table(dt.new, .v.seq)
   }
   setnames(dt.new, eff.nms)
