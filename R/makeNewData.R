@@ -28,7 +28,8 @@ makeNewData <- function(data, postMCMC, EffectsMain){
   }
   setnames(dt.new, eff.nms)
   
-  eff.fix <- names(cf.dt)[!is.element(eff.nms, names(cf.dt))]
+  # eff.fix <- names(cf.dt)[!is.element(eff.nms, names(cf.dt))]
+  eff.fix <- names(cf.dt)[!is.element(names(cf.dt), eff.nms)]
   dt.fix <- data[, eff.fix, with=F]
   dt.median <- dt.fix[, lapply(.SD, median)]
   dt.new <- data.table(dt.new, dt.median)
