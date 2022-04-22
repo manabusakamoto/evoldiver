@@ -1,3 +1,1 @@
-rateScalar.internal(phy, phy.ref){
-  phy$edge.length / phy.ref$edge.length
-}
+rateScalar.internal <- function(phy, phy.ref){phy$edge.length / phy.ref$edge.length}
