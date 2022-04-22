@@ -1,6 +1,5 @@
 rateScalar <- function(phy, phy.ref){
   if(length(phy) > 1){
-    function()
     r <- lapply(phy, rateScalar.internal, phy.ref = phy.ref)
     r <- lapply(r, function(x){data.table(t(x))})
     r <- rbindlist(r)
