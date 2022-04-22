@@ -1,1 +1,1 @@
-rateScalar <- function(phy1, phy2){phy1$edge.length / phy2$edge.length}
+rateScalar <- function(phy, phy.ref){phy$edge.length / phy.ref$edge.length}
